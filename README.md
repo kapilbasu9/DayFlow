@@ -14,6 +14,16 @@ DayFlow is a lightweight personal productivity web app designed to help individu
 ## Live Demo: 
 [Open DayFlow](https://kapilbasu9.github.io/DayFlow/)
 
+## Feedback and Support
+
+DayFlow is evolving, and feedback from early users is welcome.
+
+- **[Report a bug or request a feature](https://github.com/kapilbasu9/DayFlow/issues/new)** — Submit a new issue with your feedback.
+- **[Browse existing issues](https://github.com/kapilbasu9/DayFlow/issues)** — Check existing reports and discussions.
+- **[Feedback guide](https://github.com/kapilbasu9/DayFlow/issues/1)** — Read the welcome message and guidance for sharing feedback.
+
+When reporting a bug, describe the steps to reproduce it and what you expected to happen. Please don't post passwords, personal information, or private backup files in public issues.
+
 ## Project Repository: 
 [GitHub — DayFlow](https://github.com/kapilbasu9/DayFlow)
 

@@ -11,6 +11,12 @@ DayFlow is a lightweight personal productivity web app designed to help individu
 - **Settings:** Customize the workspace name, switch between light and dark themes, and manage local data.
 - **Backup and Restore:** Export and restore data, including full backups and supported selective restores.
 
+## Live Demo: 
+[Open DayFlow](https://kapilbasu9.github.io/DayFlow/)
+
+## Project Repository: 
+[GitHub — DayFlow](https://github.com/kapilbasu9/DayFlow)
+
 ## Technology
 
 - HTML5

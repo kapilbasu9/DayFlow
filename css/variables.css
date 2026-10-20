@@ -1,0 +1,99 @@
+:root {
+  /* Brand */
+  --color-primary: #5267e8;
+  --color-primary-hover: #4054d6;
+  --color-primary-soft: #eef0ff;
+
+  /* Backgrounds */
+  --color-background: #f7f8fc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0f2f8;
+
+  /* Text */
+  --color-text: #20243a;
+  --color-text-secondary: #72788e;
+  --color-text-inverse: #ffffff;
+
+  /* Borders and states */
+  --color-border: #e5e7f0;
+  --color-success: #198754;
+  --color-warning: #b7791f;
+  --color-danger: #d64545;
+
+  /* Typography */
+  --font-family:
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.375rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3.5rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Layout */
+  --container-width: 1160px;
+  --header-height: 76px;
+
+  /* Shape and elevation */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgb(32 36 58 / 5%);
+  --shadow-md: 0 12px 35px rgb(32 36 58 / 8%);
+
+  /* Motion */
+  --transition-fast: 160ms ease;
+}
+
+
+/* DayFlow shared theme preferences */
+
+:root {
+  color-scheme: light;
+  --color-primary: #5267e8;
+  --color-primary-hover: #4054d6;
+  --color-primary-soft: #eef0ff;
+  --color-background: #f7f8fc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f0f2f8;
+  --color-text: #20243a;
+  --color-text-secondary: #72788e;
+  --color-text-inverse: #ffffff;
+  --color-border: #e5e7f0;
+  --color-success: #198754;
+  --color-warning: #b7791f;
+  --color-danger: #d64545;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #a4b0ff;
+  --color-primary-hover: #c1c9ff;
+  --color-primary-soft: #29304f;
+  --color-background: #151722;
+  --color-surface: #202331;
+  --color-surface-muted: #2b3040;
+  --color-text: #edf0fa;
+  --color-text-secondary: #aeb5c9;
+  --color-text-inverse: #151722;
+  --color-border: #3a4053;
+  --color-success: #69d5a1;
+  --color-warning: #f3c66b;
+  --color-danger: #ff8d98;
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 15%);
+  --shadow-md: 0 12px 35px rgb(0 0 0 / 25%);
+}

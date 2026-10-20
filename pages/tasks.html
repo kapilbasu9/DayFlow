@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+
+  <title>Tasks | DayFlow</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages/tasks.css">
+
+  <script type="module" src="../js/modules/tasks.js"></script>
+  <script type="module" src="../js/appPreferences.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <aside class="app-sidebar" id="app-sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">D</span>
+        <span>DayFlow</span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a class="sidebar-link" href="./dashboard.html">
+          <span class="sidebar-icon">⌂</span>
+          Dashboard
+        </a>
+
+        <a class="sidebar-link is-active" href="./tasks.html" aria-current="page">
+          <span class="sidebar-icon">✓</span>
+          Tasks
+        </a>
+
+        <a class="sidebar-link" href="./calendar.html">
+          <span class="sidebar-icon">▦</span>
+          Calendar
+        </a>
+
+        <a class="sidebar-link" href="./shopping.html">
+          <span class="sidebar-icon">▤</span>
+          Shopping
+        </a>
+
+        <a class="sidebar-link" href="./settings.html">
+          <span class="sidebar-icon">⚙</span>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="app-profile">
+          <div class="profile-avatar">G</div>
+          <div>
+            <strong class="sidebar-profile-name">Guest workspace</strong>
+            <p class="text-muted">Local prototype</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <button
+          class="app-mobile-menu"
+          id="app-mobile-menu"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="app-sidebar"
+        >
+          ☰
+        </button>
+
+        <div>
+          <strong>My Tasks</strong>
+        </div>
+
+        <a class="btn btn-secondary" href="./dashboard.html">
+          Dashboard
+        </a>
+      </header>
+
+      <div class="app-content">
+        <div class="tasks-page">
+
+          <section class="tasks-heading">
+            <div>
+              <h1>Tasks</h1>
+              <p>Plan your work, organise your day, and track your progress.</p>
+            </div>
+          </section>
+
+          <section class="task-form-panel" id="task-form-panel">
+            <h2 id="task-form-heading">Create a new task</h2>
+
+            <form class="task-form" id="task-form">
+              <div class="task-field task-field-full">
+                <label for="task-title">Task title *</label>
+                <input
+                  id="task-title"
+                  name="title"
+                  type="text"
+                  maxlength="120"
+                  placeholder="e.g. Prepare tomorrow's plan"
+                  required
+                >
+              </div>
+
+              <div class="task-field">
+                <label for="task-category">Category</label>
+                <input
+                  id="task-category"
+                  name="category"
+                  type="text"
+                  maxlength="40"
+                  placeholder="Personal, Home, Work..."
+                >
+              </div>
+
+              <div class="task-field">
+                <label for="task-due-date">Due date</label>
+                <input
+                  id="task-due-date"
+                  name="dueDate"
+                  type="date"
+                >
+              </div>
+
+              <div class="task-field">
+                <label for="task-priority">Priority</label>
+                <select id="task-priority" name="priority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+
+              <div class="task-form-actions">
+                <button class="btn btn-primary" id="task-submit" type="submit">
+                  Add task
+                </button>
+
+                <button
+                  class="btn btn-secondary"
+                  id="task-cancel-edit"
+                  type="button"
+                  hidden
+                >
+                  Cancel edit
+                </button>
+              </div>
+
+              <p class="tasks-message task-field-full" id="task-message" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="tasks-list-panel">
+            <div class="task-toolbar">
+              <div class="task-filters" role="group" aria-label="Filter tasks">
+                <button class="task-filter is-active" type="button" data-filter="all" aria-pressed="true">
+                  All
+                </button>
+
+                <button class="task-filter" type="button" data-filter="pending" aria-pressed="false">
+                  Pending
+                </button>
+
+                <button class="task-filter" type="button" data-filter="completed" aria-pressed="false">
+                  Completed
+                </button>
+              </div>
+
+              <input
+                class="task-search"
+                id="task-search"
+                type="search"
+                placeholder="Search tasks..."
+                aria-label="Search tasks"
+              >
+            </div>
+
+            <div class="task-toolbar">
+              <h2 id="task-list-heading">Your tasks</h2>
+              <span class="tasks-message" id="task-count">0 tasks</span>
+            </div>
+
+            <div class="task-list" id="task-list">
+              <p class="tasks-empty">Loading tasks...</p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

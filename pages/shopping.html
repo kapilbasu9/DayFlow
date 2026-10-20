@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+
+    <title>Shopping Lists | DayFlow</title>
+
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/shopping.css" />
+
+    <script type="module" src="../js/modules/shopping.js"></script>
+    <script type="module" src="../js/appPreferences.js"></script>
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <aside class="app-sidebar" id="app-sidebar">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">D</span>
+          <span>DayFlow</span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a class="sidebar-link" href="./dashboard.html">
+            <span class="sidebar-icon">⌂</span>
+            Dashboard
+          </a>
+
+          <a class="sidebar-link" href="./tasks.html">
+            <span class="sidebar-icon">✓</span>
+            Tasks
+          </a>
+
+          <a class="sidebar-link" href="./calendar.html">
+            <span class="sidebar-icon">▦</span>
+            Calendar
+          </a>
+
+          <a
+            class="sidebar-link is-active"
+            href="./shopping.html"
+            aria-current="page"
+          >
+            <span class="sidebar-icon">▤</span>
+            Shopping
+          </a>
+
+          <a class="sidebar-link" href="./settings.html">
+            <span class="sidebar-icon">⚙</span>
+            Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="app-profile">
+            <div class="profile-avatar">G</div>
+            <div>
+              <strong class="sidebar-profile-name">Guest workspace</strong>
+              <p class="text-muted">Local prototype</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <header class="app-topbar">
+          <button
+            class="app-mobile-menu"
+            id="app-mobile-menu"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="app-sidebar"
+          >
+            ☰
+          </button>
+
+          <strong>Shopping Lists</strong>
+
+          <a class="btn btn-secondary" href="./dashboard.html"> Dashboard </a>
+        </header>
+
+        <div class="app-content">
+          <div class="shopping-page">
+            <section class="shopping-heading">
+              <div>
+                <h1>Shopping Lists</h1>
+                <p>Organise your shopping and keep track of what you need.</p>
+              </div>
+            </section>
+
+            <div class="shopping-layout">
+              <section
+                class="shopping-panel"
+                aria-labelledby="shopping-lists-heading"
+              >
+                <h2 id="shopping-lists-heading">My lists</h2>
+
+                <form class="shopping-create-form" id="shopping-create-form">
+                  <div class="shopping-field">
+                    <label for="shopping-list-name">New list name</label>
+                    <input
+                      id="shopping-list-name"
+                      type="text"
+                      maxlength="80"
+                      placeholder="e.g. Weekly groceries"
+                      required
+                    />
+                  </div>
+
+                  <button class="btn btn-primary" type="submit">
+                    Create list
+                  </button>
+                </form>
+
+                <p
+                  id="shopping-storage-message"
+                  class="shopping-storage-message"
+                  role="alert"
+                  aria-live="polite"
+                  hidden
+                ></p>
+
+                <div
+                  class="shopping-list-collection"
+                  id="shopping-list-collection"
+                >
+                  <p class="shopping-empty">Loading lists...</p>
+                </div>
+              </section>
+
+              <section
+                class="shopping-panel"
+                aria-label="Selected shopping list"
+              >
+                <div id="shopping-detail">
+                  <div class="shopping-detail-header">
+                    <div>
+                      <h2 id="shopping-detail-title">Select a list</h2>
+                      <p
+                        class="shopping-detail-description"
+                        id="shopping-detail-description"
+                      >
+                        Create a list to get started.
+                      </p>
+                    </div>
+
+                    <div class="shopping-detail-actions">
+                      <button
+                        class="shopping-action"
+                        id="shopping-rename-list"
+                        type="button"
+                        disabled
+                      >
+                        Rename
+                      </button>
+
+                      <button
+                        class="shopping-action shopping-action-delete"
+                        id="shopping-delete-list"
+                        type="button"
+                        disabled
+                      >
+                        Delete list
+                      </button>
+                    </div>
+                  </div>
+
+                  <div id="shopping-active-content" class="shopping-hidden">
+                    <div class="shopping-progress">
+                      <div class="shopping-progress-label">
+                        <span>Shopping progress</span>
+                        <span id="shopping-progress-text"
+                          >0 of 0 purchased</span
+                        >
+                      </div>
+
+                      <div
+                        class="shopping-progress-track"
+                        role="progressbar"
+                        id="shopping-progress-bar"
+                        aria-label="Shopping progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                      >
+                        <div
+                          class="shopping-progress-fill"
+                          id="shopping-progress-fill"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <form class="shopping-item-form" id="shopping-item-form">
+                      <div class="shopping-field shopping-item-name-field">
+                        <label for="shopping-item-name">Item name</label>
+                        <input
+                          id="shopping-item-name"
+                          type="text"
+                          maxlength="100"
+                          placeholder="e.g. Rice"
+                          required
+                        />
+                      </div>
+
+                      <div class="shopping-field">
+                        <label for="shopping-item-quantity">Quantity</label>
+                        <input
+                          id="shopping-item-quantity"
+                          type="number"
+                          min="0.01"
+                          max="999999"
+                          step="any"
+                          value="1"
+                          required
+                        />
+                      </div>
+
+                      <div class="shopping-field">
+                        <label for="shopping-item-unit">Unit</label>
+                        <select id="shopping-item-unit">
+                          <option value="pcs">Pieces</option>
+                          <option value="kg">Kilograms</option>
+                          <option value="g">Grams</option>
+                          <option value="L">Litres</option>
+                          <option value="ml">Millilitres</option>
+                          <option value="pack">Packs</option>
+                          <option value="bottle">Bottles</option>
+                          <option value="box">Boxes</option>
+                          <option value="dozen">Dozen</option>
+                        </select>
+                      </div>
+
+                      <div class="shopping-item-form-actions">
+                        <button
+                          class="btn btn-primary"
+                          id="shopping-item-submit"
+                          type="submit"
+                        >
+                          Add item
+                        </button>
+
+                        <button
+                          class="shopping-action shopping-hidden"
+                          id="shopping-item-cancel"
+                          type="button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+
+                    <p
+                      class="shopping-message"
+                      id="shopping-item-message"
+                      role="status"
+                      aria-live="polite"
+                    ></p>
+
+                    <div class="shopping-items-heading">
+                      <h3>Items</h3>
+                      <span class="shopping-message" id="shopping-item-count">
+                        0 items
+                      </span>
+                    </div>
+
+                    <div class="shopping-item-list" id="shopping-item-list">
+                      <p class="shopping-empty">No items yet.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

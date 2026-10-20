@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>Settings | DayFlow</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages/settings.css">
+
+  <script type="module" src="../js/appPreferences.js"></script>
+  <script type="module" src="../js/modules/settings.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">D</span>
+        <span>DayFlow</span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a class="sidebar-link" href="./dashboard.html">
+          <span class="sidebar-icon">⌂</span> Dashboard
+        </a>
+        <a class="sidebar-link" href="./tasks.html">
+          <span class="sidebar-icon">✓</span> Tasks
+        </a>
+        <a class="sidebar-link" href="./calendar.html">
+          <span class="sidebar-icon">▦</span> Calendar
+        </a>
+        <a class="sidebar-link" href="./shopping.html">
+          <span class="sidebar-icon">▤</span> Shopping
+        </a>
+        <a class="sidebar-link is-active" href="./settings.html" aria-current="page">
+          <span class="sidebar-icon">⚙</span> Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="app-profile">
+          <div class="profile-avatar">G</div>
+          <div>
+            <strong class="sidebar-profile-name">Guest workspace</strong>
+            <p class="text-muted">Local prototype</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <button
+          class="app-mobile-menu"
+          id="app-mobile-menu"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="app-sidebar"
+        >☰</button>
+
+        <strong>Settings</strong>
+        <a class="btn btn-secondary" href="./dashboard.html">Dashboard</a>
+      </header>
+
+      <div class="app-content">
+        <div class="settings-page">
+
+          <section class="settings-heading">
+            <h1>Settings</h1>
+            <p>Customise your DayFlow workspace and manage local data.</p>
+          </section>
+
+          <!-- Appearance -->
+          <details class="settings-panel settings-panel-collapsible">
+            <summary class="settings-panel-summary">
+              <span class="settings-panel-summary-content">
+                <span class="settings-panel-summary-title">Appearance</span>
+                <span class="settings-panel-summary-description">
+                  Manage your light and dark theme.
+                </span>
+              </span>
+              <span class="settings-panel-chevron" aria-hidden="true"></span>
+            </summary>
+
+            <div class="settings-panel-body">
+              <div class="settings-row">
+                <div class="settings-row-content">
+                  <span class="settings-row-title">Dark mode</span>
+                  <p class="settings-row-help">
+                    Apply the selected theme across DayFlow pages.
+                  </p>
+                </div>
+                <label class="settings-theme-control">
+                  <span id="theme-label">Light</span>
+                  <input
+                    class="settings-switch"
+                    id="theme-toggle"
+                    type="checkbox"
+                    role="switch"
+                    aria-label="Enable dark mode"
+                  >
+                </label>
+              </div>
+              <p class="settings-message" id="theme-message" role="status" aria-live="polite"></p>
+            </div>
+          </details>
+
+          <!-- Workspace -->
+          <details class="settings-panel settings-panel-collapsible">
+            <summary class="settings-panel-summary">
+              <span class="settings-panel-summary-content">
+                <span class="settings-panel-summary-title">Workspace</span>
+                <span class="settings-panel-summary-description">
+                  Change your local workspace name.
+                </span>
+              </span>
+              <span class="settings-panel-chevron" aria-hidden="true"></span>
+            </summary>
+
+            <div class="settings-panel-body">
+              <form id="workspace-form">
+                <div class="settings-field">
+                  <label for="workspace-name">Workspace name</label>
+                  <input
+                    id="workspace-name"
+                    name="workspaceName"
+                    type="text"
+                    maxlength="60"
+                    placeholder="My workspace"
+                    required
+                  >
+                </div>
+                <button class="btn btn-primary" type="submit">Save workspace name</button>
+              </form>
+              <p class="settings-message" id="workspace-message" role="status" aria-live="polite"></p>
+            </div>
+          </details>
+
+          <!-- Local data -->
+          <details class="settings-panel settings-panel-collapsible">
+            <summary class="settings-panel-summary">
+              <span class="settings-panel-summary-content">
+                <span class="settings-panel-summary-title">Local data</span>
+                <span class="settings-panel-summary-description">
+                  View stored data counts or clear local tasks and shopping lists.
+                </span>
+              </span>
+              <span class="settings-panel-chevron" aria-hidden="true"></span>
+            </summary>
+
+            <div class="settings-panel-body">
+              <div class="settings-data-grid">
+                <div class="settings-data-card">
+                  <strong id="settings-task-count">0</strong>
+                  <span>Saved tasks</span>
+                </div>
+                <div class="settings-data-card">
+                  <strong id="settings-list-count">0</strong>
+                  <span>Shopping lists</span>
+                </div>
+                <div class="settings-data-card">
+                  <strong id="settings-item-count">0</strong>
+                  <span>Shopping items</span>
+                </div>
+              </div>
+
+              <div class="settings-row">
+                <div class="settings-row-content">
+                  <span class="settings-row-title">Clear DayFlow data</span>
+                  <p class="settings-row-help">
+                    Remove saved tasks and shopping lists from this browser.
+                    Your theme and workspace name will be kept.
+                  </p>
+                </div>
+                <button
+                  class="btn btn-secondary settings-danger-button"
+                  id="clear-dayflow-data"
+                  type="button"
+                >Clear data</button>
+              </div>
+              <p class="settings-message" id="data-message" role="status" aria-live="polite"></p>
+            </div>
+          </details>
+
+          <!-- Unified backup and restore -->
+          <details class="settings-panel settings-panel-collapsible">
+            <summary class="settings-panel-summary">
+              <span class="settings-panel-summary-content">
+                <span class="settings-panel-summary-title">Backup &amp; Restore</span>
+                <span class="settings-panel-summary-description">
+                  Download all DayFlow data or back up a specific section.
+                </span>
+              </span>
+              <span class="settings-panel-chevron" aria-hidden="true"></span>
+            </summary>
+
+            <div class="settings-panel-body">
+              <div class="settings-field">
+                <label for="backup-type">Choose what to back up</label>
+                <select id="backup-type" name="backupType">
+                  <option value="full">Full DayFlow Backup — All data</option>
+                  <option value="tasks">Tasks Only</option>
+                  <option value="calendar">Calendar Only</option>
+                  <option value="shopping">Shopping Only</option>
+                </select>
+                <p class="settings-row-help" id="backup-type-description">
+                  Includes tasks, shopping lists and items, theme, and workspace name.
+                </p>
+              </div>
+
+              <div class="settings-row">
+                <div class="settings-row-content">
+                  <span class="settings-row-title">Download backup</span>
+                  <p class="settings-row-help">
+                    Download the selected data as a JSON file. Your saved data will not be changed.
+                  </p>
+                </div>
+                <button class="btn btn-primary" id="download-selected-backup" type="button">
+                  Download Backup
+                </button>
+              </div>
+
+              <div class="settings-row">
+                <div class="settings-row-content">
+                  <span class="settings-row-title">Restore full backup</span>
+                  <p class="settings-row-help">
+                    Restore a supported full DayFlow JSON backup. Existing data will be replaced after confirmation.
+                  </p>
+                </div>
+                <button class="btn btn-secondary" id="restore-dayflow-backup" type="button">
+                  Select backup file
+                </button>
+                <input
+                  id="dayflow-backup-file"
+                  type="file"
+                  accept=".json,application/json"
+                  hidden
+                >
+              </div>
+
+              <p class="settings-message" id="backup-message" role="status" aria-live="polite"></p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

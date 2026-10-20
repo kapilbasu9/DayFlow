@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+
+  <title>Calendar | DayFlow</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages/calendar.css">
+
+  <script type="module" src="../js/modules/calendar.js"></script>
+  <script type="module" src="../js/appPreferences.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <aside class="app-sidebar" id="app-sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">D</span>
+        <span>DayFlow</span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a class="sidebar-link" href="./dashboard.html">
+          <span class="sidebar-icon">⌂</span>
+          Dashboard
+        </a>
+
+        <a class="sidebar-link" href="./tasks.html">
+          <span class="sidebar-icon">✓</span>
+          Tasks
+        </a>
+
+        <a class="sidebar-link is-active"
+           href="./calendar.html"
+           aria-current="page">
+          <span class="sidebar-icon">▦</span>
+          Calendar
+        </a>
+
+        <a class="sidebar-link" href="./shopping.html">
+          <span class="sidebar-icon">▤</span>
+          Shopping
+        </a>
+
+        <a class="sidebar-link" href="./settings.html">
+          <span class="sidebar-icon">⚙</span>
+          Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="app-profile">
+          <div class="profile-avatar">G</div>
+          <div>
+            <strong class="sidebar-profile-name">Guest workspace</strong>
+            <p class="text-muted">Local prototype</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <button
+          class="app-mobile-menu"
+          id="app-mobile-menu"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="app-sidebar">
+          ☰
+        </button>
+
+        <strong>Calendar</strong>
+
+        <a class="btn btn-secondary" href="./tasks.html">
+          Manage tasks
+        </a>
+      </header>
+
+      <div class="app-content">
+        <div class="calendar-page">
+
+          <section class="calendar-heading">
+            <div>
+              <h1>Calendar</h1>
+              <p>See your scheduled tasks and plan the days ahead.</p>
+            </div>
+          </section>
+
+          <section class="calendar-panel"
+                   aria-label="Monthly task calendar">
+
+            <div class="calendar-toolbar">
+              <h2 class="calendar-month-title"
+                  id="calendar-month-title"
+                  aria-live="polite">
+                Calendar
+              </h2>
+
+              <div class="calendar-navigation">
+                <button
+                  class="calendar-nav-button"
+                  id="calendar-prev"
+                  type="button"
+                  aria-label="Previous month">
+                  ←
+                </button>
+
+                <button
+                  class="calendar-nav-button"
+                  id="calendar-today"
+                  type="button">
+                  Today
+                </button>
+
+                <button
+                  class="calendar-nav-button"
+                  id="calendar-next"
+                  type="button"
+                  aria-label="Next month">
+                  →
+                </button>
+              </div>
+            </div>
+
+            <div class="calendar-weekdays" aria-hidden="true">
+              <div class="calendar-weekday">Mon</div>
+              <div class="calendar-weekday">Tue</div>
+              <div class="calendar-weekday">Wed</div>
+              <div class="calendar-weekday">Thu</div>
+              <div class="calendar-weekday">Fri</div>
+              <div class="calendar-weekday">Sat</div>
+              <div class="calendar-weekday">Sun</div>
+            </div>
+
+            <div
+              class="calendar-grid"
+              id="calendar-grid"
+              role="group"
+              aria-label="Calendar dates">
+            </div>
+
+            <div class="calendar-legend">
+              <span class="calendar-legend-item">
+                <span class="calendar-legend-today"></span>
+                Today
+              </span>
+
+              <span class="calendar-legend-item">
+                <span class="calendar-legend-task"></span>
+                Date with tasks
+              </span>
+            </div>
+          </section>
+
+          <section class="calendar-agenda-panel"
+                   aria-labelledby="calendar-agenda-title">
+
+            <div class="calendar-agenda-heading">
+              <h2 id="calendar-agenda-title">Tasks for this date</h2>
+
+              <span class="calendar-agenda-count"
+                    id="calendar-agenda-count">
+                0 tasks
+              </span>
+            </div>
+
+            <div class="calendar-agenda-list"
+                 id="calendar-agenda-list">
+              <p class="calendar-agenda-empty">Loading tasks...</p>
+            </div>
+
+            <p class="calendar-agenda-message"
+               id="calendar-message"
+               role="status"
+               aria-live="polite"></p>
+
+            <p class="tasks-message">
+              Need to create or edit a task?
+              <a href="./tasks.html">Open Tasks</a>.
+            </p>
+
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

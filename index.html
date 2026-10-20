@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DayFlow helps you organise everyday tasks, shopping lists, and important dates in one simple place."
+    />
+    <meta name="theme-color" content="#f7f8fc" />
+    <title>DayFlow — Make everyday life simpler</title>
+
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/pages/landing.css" />
+
+    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/appPreferences.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./index.html" aria-label="DayFlow home">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>DayFlow</span>
+        </a>
+
+        <button
+          class="btn btn-ghost menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary" href="./pages/dashboard.html">
+            Explore
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <span class="badge">A simpler way to stay organised</span>
+
+            <h1>
+              Less to remember.<br />
+              <span class="hero-highlight">More life to live.</span>
+            </h1>
+
+            <p class="hero-description">
+              Keep everyday tasks, shopping lists, and important dates organised
+              in one simple place.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="./pages/dashboard.html">
+                Explore DayFlow <span aria-hidden="true">→</span>
+              </a>
+
+              <a class="btn btn-secondary" href="#features">
+                Discover features
+              </a>
+            </div>
+
+            <p class="hero-note">
+              A simple workspace for the things that matter every day.
+            </p>
+          </div>
+
+          <div class="preview-shell" aria-label="DayFlow dashboard preview">
+            <div class="preview-window">
+              <div class="preview-topbar">
+                <div class="preview-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span class="preview-label">Your day at a glance</span>
+              </div>
+
+              <div class="preview-body">
+                <div class="preview-greeting">
+                  <div>
+                    <span class="preview-eyebrow">YOUR OVERVIEW</span>
+                    <h2>Today's focus</h2>
+                  </div>
+                  <span class="preview-date">MY DAY</span>
+                </div>
+
+                <div class="preview-summary">
+                  <div class="summary-card">
+                    <span class="summary-icon">✓</span>
+                    <strong>Stay focused</strong>
+                    <span>One step at a time</span>
+                  </div>
+                  <div class="summary-card">
+                    <span class="summary-icon summary-icon-purple">◷</span>
+                    <strong>Plan ahead</strong>
+                    <span>Know what's next</span>
+                  </div>
+                </div>
+
+                <div class="preview-list-heading">
+                  <strong>A little organisation</strong>
+                  <span>YOUR ROUTINE</span>
+                </div>
+
+                <div class="preview-task">
+                  <span class="preview-checkbox"></span>
+                  <span>Plan today's priorities</span>
+                  <span class="task-tag">Today</span>
+                </div>
+
+                <div class="preview-task">
+                  <span class="preview-checkbox"></span>
+                  <span>Prepare a shopping list</span>
+                  <span class="task-tag">Home</span>
+                </div>
+
+                <div class="preview-task">
+                  <span class="preview-checkbox"></span>
+                  <span>Review upcoming plans</span>
+                  <span class="task-tag">Plan</span>
+                </div>
+
+                <div class="preview-footer">
+                  <span class="preview-status-dot"></span>
+                  Small steps make a difference.
+                </div>
+              </div>
+            </div>
+            <div class="preview-decoration" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section features-section" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <span class="badge">Everyday essentials</span>
+            <h2>Everything starts with a little clarity.</h2>
+            <p>
+              A straightforward place for everyday responsibilities, without
+              unnecessary complexity.
+            </p>
+          </div>
+
+          <div class="grid grid-3">
+            <article class="card feature-card">
+              <span class="feature-icon">✓</span>
+              <h3>Everyday tasks</h3>
+              <p>
+                Keep track of what needs doing, what's important, and what
+                you've already completed.
+              </p>
+            </article>
+
+            <article class="card feature-card">
+              <span class="feature-icon feature-icon-purple">▤</span>
+              <h3>Shopping lists</h3>
+              <p>
+                Organise shopping items in one clear list instead of searching
+                through old notes.
+              </p>
+            </article>
+
+            <article class="card feature-card">
+              <span class="feature-icon feature-icon-orange">◷</span>
+              <h3>Important dates</h3>
+              <p>
+                See upcoming tasks and dates so you can plan your time with
+                greater confidence.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section how-section" id="how-it-works">
+        <div class="container how-grid">
+          <div>
+            <span class="badge">Simple by design</span>
+            <h2>Start small. Stay organised.</h2>
+            <p>
+              DayFlow is designed around a simple idea: capture what matters,
+              decide what comes next, and make progress without extra friction.
+            </p>
+          </div>
+
+          <div class="steps-list">
+            <article class="step-item">
+              <span class="step-number">01</span>
+              <div>
+                <h3>Write it down</h3>
+                <p>Capture a task, shopping item, or upcoming date.</p>
+              </div>
+            </article>
+
+            <article class="step-item">
+              <span class="step-number">02</span>
+              <div>
+                <h3>Keep it organised</h3>
+                <p>Use clear lists and dates to see what matters.</p>
+              </div>
+            </article>
+
+            <article class="step-item">
+              <span class="step-number">03</span>
+              <div>
+                <h3>Take the next step</h3>
+                <p>Work through responsibilities at your own pace.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about">
+        <div class="container about-panel">
+          <div>
+            <span class="badge">Our philosophy</span>
+            <h2>Technology should make everyday life easier.</h2>
+            <p>
+              DayFlow is being built around clarity, accessibility, and useful
+              everyday tools. We want the experience to feel approachable for
+              people of different ages.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="./pages/dashboard.html">
+            Explore the workspace →
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark" aria-hidden="true">D</span>
+          <span>DayFlow</span>
+        </a>
+        <p>Made for a more organised everyday.</p>
+        <p>© <span id="current-year"></span> DayFlow</p>
+      </div>
+    </footer>
+  </body>
+</html>

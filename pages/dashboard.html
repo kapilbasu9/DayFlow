@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your DayFlow everyday dashboard.">
+  <title>Dashboard — DayFlow</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages/dashboard.css">
+
+  <script type="module" src="../js/modules/dashboard.js"></script>
+  <script type="module" src="../js/appPreferences.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>DayFlow</span>
+      </a>
+
+      <p class="sidebar-label">Workspace</p>
+
+      <nav class="sidebar-nav" aria-label="Workspace navigation">
+        <a class="sidebar-link is-active" href="./dashboard.html">
+          <span class="sidebar-icon" aria-hidden="true">▦</span>
+          Dashboard
+        </a>
+
+        <a class="sidebar-link" href="./tasks.html">
+          <span class="sidebar-icon" aria-hidden="true">✓</span>
+          My Tasks
+        </a>
+
+        <a class="sidebar-link" href="./calendar.html">
+          <span class="sidebar-icon" aria-hidden="true">▦</span>
+          Calendar
+        </a>
+
+        <a class="sidebar-link" href="./shopping.html">
+          <span class="sidebar-icon" aria-hidden="true">☷</span>
+          Shopping List
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a class="sidebar-link" href="./settings.html">
+          <span class="sidebar-icon" aria-hidden="true">⚙</span>
+          Settings
+        </a>
+        <a class="sidebar-link" href="../index.html">
+          <span class="sidebar-icon" aria-hidden="true">←</span>
+          Back to website
+        </a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button
+            class="btn btn-secondary app-mobile-menu"
+            id="app-mobile-menu"
+            type="button"
+            aria-expanded="false"
+            aria-controls="app-sidebar"
+            aria-label="Open navigation"
+          >
+            ☰
+          </button>
+
+          <div>
+            <h1>Dashboard</h1>
+            <p>Your everyday overview</p>
+          </div>
+        </div>
+
+        <div class="app-profile">
+          <span class="profile-avatar" aria-hidden="true">G</span>
+          <span class="profile-name">Guest workspace</span>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <section class="dashboard-welcome">
+          <div>
+            <h2>Make today a little simpler.</h2>
+            <p>Here's a quick look at your day.</p>
+          </div>
+
+          <div class="dashboard-date" id="dashboard-date">
+            Loading date…
+          </div>
+        </section>
+
+        <section class="dashboard-stats" aria-label="Task summary">
+          <article class="stat-card">
+            <span class="stat-label">Today's tasks</span>
+            <strong class="stat-value" id="today-count">0</strong>
+            <span class="stat-description">Tasks due today</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Completed</span>
+            <strong class="stat-value" id="completed-count">0</strong>
+            <span class="stat-description">Tasks completed today</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Remaining</span>
+            <strong class="stat-value" id="remaining-count">0</strong>
+            <span class="stat-description">Tasks still to do today</span>
+          </article>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <h3>Today's tasks</h3>
+              <a href="./tasks.html">View all</a>
+            </div>
+
+            <div class="dashboard-task-list" id="dashboard-task-list">
+              <p>Loading your tasks…</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h3>Quick actions</h3>
+            </div>
+
+            <div class="quick-actions">
+              <a class="quick-action" href="./tasks.html">
+                <span class="quick-action-icon">+</span>
+                <span>
+                  Create a task
+                  <small>Add something to your list</small>
+                </span>
+              </a>
+
+              <a class="quick-action" href="./shopping.html">
+                <span class="quick-action-icon">☷</span>
+                <span>
+                  Shopping list
+                  <small>Keep track of what you need</small>
+                </span>
+              </a>
+
+              <a class="quick-action" href="./calendar.html">
+                <span class="quick-action-icon">▦</span>
+                <span>
+                  View calendar
+                  <small>See upcoming plans</small>
+                </span>
+              </a>
+            </div>
+          </section>
+        </div>
+
+        <p class="text-muted" style="margin-top:24px;font-size:12px">
+          Prototype mode: tasks currently use sample data in your browser.
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

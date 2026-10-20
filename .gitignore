@@ -1,0 +1,28 @@
+﻿# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+*.tmp
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local backups and exported data
+*.bak
+*.backup

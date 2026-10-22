@@ -75,9 +75,7 @@ DayFlow/
 │   ├── app.js
 │   ├── appPreferences.js
 │   ├── modules/
-│   ├── services/
-│   ├── components/
-│   └── utils/
+│   └── services/
 ├── docs/
 └── tests/
 ```
@@ -86,11 +84,30 @@ DayFlow/
 
 Project architecture and data-model notes are available in the `docs/` directory.
 
-## Testing Status
 
-The application has undergone manual checks covering navigation, task and shopping-list operations, preferences, calendar behavior, backup and restore, responsive layouts, and cross-tab behavior.
+## Automated Testing
 
-The repository does not currently include an automated test suite. Manual verification does not guarantee that every possible scenario has been tested.
+DayFlow uses Node.js's built-in test runner and has no additional test dependencies.
+
+Run the automated suite from the project root:
+
+```bash
+npm test
+```
+
+The current suite contains 53 tests covering:
+
+- Task creation, updates, deletion, validation, and storage failures.
+- Shopping-list and item operations, validation, and storage failures.
+- Calendar date parsing, task matching, and completion updates.
+- Preference persistence, theme application, and workspace-name validation.
+- Full and selective backup/restore, data preservation, and rollback behavior.
+- Static checks for relative JavaScript imports and local HTML/CSS references.
+
+The service tests use mocked in-memory storage rather than the browser's actual `localStorage`.
+
+Automated tests complement, but do not replace, manual browser testing of the interface, responsive layouts, accessibility, and deployed behavior.
+
 
 ## Current Status
 

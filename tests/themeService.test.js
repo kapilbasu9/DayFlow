@@ -131,10 +131,17 @@ test("failed preference writes are reported without applying the new theme", () 
   document.documentElement.style.colorScheme = "light";
   state.failWrite = true;
 
-  assert.throws(
-    () => setTheme("dark"),
-    /Unable to save your theme preference/i,
-  );
+  const originalConsoleError = console.error;
+  console.error = () => {};
+
+  try {
+    assert.throws(
+      () => setTheme("dark"),
+      /Unable to save your theme preference/i,
+    );
+  } finally {
+    console.error = originalConsoleError;
+  }
 
   assert.equal(document.documentElement.dataset.theme, "light");
   assert.equal(document.documentElement.style.colorScheme, "light");

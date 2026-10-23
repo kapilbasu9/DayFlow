@@ -178,11 +178,11 @@ The application currently includes:
 - Responsive page layouts and navigation.
 - Cross-tab synchronization for supported storage changes.
 
+
 ## Known Limitations and Future Work
 
-The following are not currently implemented as complete features:
+The following capabilities are not currently implemented as complete features:
 
-- Automated test suite.
 - Recurring tasks and task reminders.
 - Subtasks and richer task notes.
 - Account-based synchronization and shared family workspaces.
@@ -191,8 +191,13 @@ The following are not currently implemented as complete features:
 
 These capabilities should be introduced incrementally, with testing and documented data-model changes where required.
 
+
 ## Quality Assurance
 
-Manual testing has covered navigation, CRUD operations, preference persistence, calendar behavior, backup/restore, responsive layouts, and selected cross-tab behaviors.
+DayFlow has an automated test suite using Node.js's built-in test runner. The current suite contains 53 tests covering task and shopping operations, calendar date handling, preferences, backup/restore behavior, and static import/resource references.
 
-Manual checks are useful but do not replace repeatable automated tests. The testing phase should establish automated coverage for service validation, CRUD behavior, storage failures, date handling, and backup/restore safety before major features are added.
+Run the suite from the project root using `npm test`.
+
+Manual browser checks have also covered navigation, CRUD operations, preference persistence, calendar behavior, backup/restore, responsive layouts, cross-tab behavior, and the deployed website.
+
+Automated and manual tests complement each other. Continue adding regression tests as new features are introduced, particularly for data validation, recovery behavior, date boundaries, and compatibility with existing stored data.

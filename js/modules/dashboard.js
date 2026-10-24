@@ -1,10 +1,18 @@
-import { getTasks, updateTask } from "../services/taskService.js";
+﻿import { getTasks, updateTask } from "../services/taskService.js";
+import { getDashboardSummary } from "../services/dashboardService.js";
+
+const TASKS_KEY = "dayflow.tasks.v1";
 
 const elements = {
   date: document.querySelector("#dashboard-date"),
   todayCount: document.querySelector("#today-count"),
   completedCount: document.querySelector("#completed-count"),
   remainingCount: document.querySelector("#remaining-count"),
+  overdueCount: document.querySelector("#overdue-count"),
+  progressDescription: document.querySelector("#today-progress-description"),
+  progressLabel: document.querySelector("#today-progress-label"),
+  progressBar: document.querySelector("#today-progress-bar"),
+  progressFill: document.querySelector("#today-progress-fill"),
   taskList: document.querySelector("#dashboard-task-list"),
   mobileMenu: document.querySelector("#app-mobile-menu"),
   sidebar: document.querySelector("#app-sidebar"),
@@ -17,19 +25,6 @@ function formatDate(date) {
     month: "short",
     year: "numeric",
   }).format(date);
-}
-
-function isDueToday(dueDate) {
-  if (!dueDate) return false;
-
-  const today = new Date();
-  const todayString = [
-    today.getFullYear(),
-    String(today.getMonth() + 1).padStart(2, "0"),
-    String(today.getDate()).padStart(2, "0"),
-  ].join("-");
-
-  return dueDate === todayString;
 }
 
 function formatDueDate(dueDate) {
@@ -48,7 +43,6 @@ function formatDueDate(dueDate) {
 function showTaskMessage(message, isError = false) {
   if (!elements.taskList) return;
 
-  // Remove any previous status message without removing task rows.
   elements.taskList
     .querySelectorAll("[data-dashboard-message]")
     .forEach((element) => element.remove());
@@ -65,10 +59,61 @@ function showTaskMessage(message, isError = false) {
   elements.taskList.prepend(status);
 }
 
-function renderTask(task) {
+function updateSummaryCards(summary) {
+  if (elements.todayCount) {
+    elements.todayCount.textContent =
+      String(summary.totalDueTodayCount);
+  }
+
+  if (elements.completedCount) {
+    elements.completedCount.textContent =
+      String(summary.completedDueTodayCount);
+  }
+
+  if (elements.remainingCount) {
+    elements.remainingCount.textContent =
+      String(summary.remainingDueTodayCount);
+  }
+
+  if (elements.overdueCount) {
+    elements.overdueCount.textContent =
+      String(summary.overdueCount);
+  }
+
+  const percentage = summary.todayCompletionPercentage;
+
+  if (elements.progressLabel) {
+    elements.progressLabel.textContent = `${percentage}%`;
+  }
+
+  if (elements.progressBar) {
+    elements.progressBar.setAttribute(
+      "aria-valuenow",
+      String(percentage),
+    );
+  }
+
+  if (elements.progressFill) {
+    elements.progressFill.style.width = `${percentage}%`;
+  }
+
+  if (elements.progressDescription) {
+    elements.progressDescription.textContent =
+      summary.totalDueTodayCount === 0
+        ? "No tasks due today yet."
+        : `${summary.completedDueTodayCount} of ` +
+          `${summary.totalDueTodayCount} tasks due today completed.`;
+  }
+}
+
+function renderTask(task, isOverdue) {
   const row = document.createElement("label");
 
-  row.className = `dashboard-task${task.completed ? " is-complete" : ""}`;
+  row.className = [
+    "dashboard-task",
+    task.completed ? "is-complete" : "",
+    isOverdue ? "is-overdue" : "",
+  ].filter(Boolean).join(" ");
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -84,13 +129,25 @@ function renderTask(task) {
 
   const meta = document.createElement("span");
   meta.className = "dashboard-task-meta";
-  meta.textContent = `${
-    task.category || "General"
-  } · ${formatDueDate(task.dueDate)}`;
+
+  const details = [
+    task.category || "General",
+    formatDueDate(task.dueDate),
+  ];
+
+  if (isOverdue) {
+    details.push("Overdue");
+  }
+
+  meta.textContent = details.join(" · ");
 
   const priority = document.createElement("span");
-  priority.className = `priority-dot${task.priority === "low" ? " low" : ""}`;
-  priority.setAttribute("aria-label", `${task.priority || "medium"} priority`);
+  priority.className =
+    `priority-dot${task.priority === "low" ? " low" : ""}`;
+  priority.setAttribute(
+    "aria-label",
+    `${task.priority || "medium"} priority`,
+  );
 
   checkbox.addEventListener("change", () => {
     try {
@@ -112,7 +169,6 @@ function renderTask(task) {
     } catch (error) {
       console.error("Unable to update dashboard task:", error);
 
-      // Restore the checkbox to the last known saved state.
       checkbox.checked = Boolean(task.completed);
 
       showTaskMessage(
@@ -130,71 +186,76 @@ function renderTask(task) {
   return row;
 }
 
+function resetDashboardAfterError(error) {
+  for (const element of [
+    elements.todayCount,
+    elements.completedCount,
+    elements.remainingCount,
+    elements.overdueCount,
+  ]) {
+    if (element) element.textContent = "—";
+  }
+
+  if (elements.progressLabel) {
+    elements.progressLabel.textContent = "—";
+  }
+
+  if (elements.progressBar) {
+    elements.progressBar.setAttribute("aria-valuenow", "0");
+  }
+
+  if (elements.progressFill) {
+    elements.progressFill.style.width = "0%";
+  }
+
+  if (elements.progressDescription) {
+    elements.progressDescription.textContent =
+      "Progress is unavailable until tasks can be loaded.";
+  }
+
+  elements.taskList.replaceChildren();
+
+  const errorMessage = document.createElement("p");
+  errorMessage.setAttribute("role", "alert");
+  errorMessage.style.color = "var(--color-danger)";
+  errorMessage.textContent =
+    error instanceof Error
+      ? `Tasks could not be loaded: ${error.message}`
+      : "Tasks could not be loaded. Please refresh the page and try again.";
+
+  elements.taskList.append(errorMessage);
+}
+
 function renderDashboard() {
   if (!elements.taskList) return;
 
   try {
     const allTasks = getTasks();
+    const summary = getDashboardSummary(allTasks);
 
-    const todaysTasks = allTasks.filter((task) => isDueToday(task.dueDate));
-
-    const completed = todaysTasks.filter((task) => task.completed).length;
-
-    const remaining = todaysTasks.length - completed;
-
-    if (elements.todayCount) {
-      elements.todayCount.textContent = String(todaysTasks.length);
-    }
-
-    if (elements.completedCount) {
-      elements.completedCount.textContent = String(completed);
-    }
-
-    if (elements.remainingCount) {
-      elements.remainingCount.textContent = String(remaining);
-    }
-
+    updateSummaryCards(summary);
     elements.taskList.replaceChildren();
 
-    if (todaysTasks.length === 0) {
+    if (summary.myDayTasks.length === 0) {
       const emptyMessage = document.createElement("p");
       emptyMessage.textContent =
-        "No tasks due today. Add a task with today's date to see it here.";
+        "Your My Day is clear. Add a task due today or review your task list.";
 
       elements.taskList.append(emptyMessage);
       return;
     }
 
-    todaysTasks.forEach((task) => {
-      elements.taskList.append(renderTask(task));
+    summary.myDayTasks.forEach((task) => {
+      const isOverdue =
+        !task.completed &&
+        Boolean(task.dueDate) &&
+        task.dueDate < summary.todayKey;
+
+      elements.taskList.append(renderTask(task, isOverdue));
     });
   } catch (error) {
     console.error("Unable to load dashboard tasks:", error);
-
-    // Do not display old counts as though they are current.
-    if (elements.todayCount) {
-      elements.todayCount.textContent = "—";
-    }
-
-    if (elements.completedCount) {
-      elements.completedCount.textContent = "—";
-    }
-
-    if (elements.remainingCount) {
-      elements.remainingCount.textContent = "—";
-    }
-
-    elements.taskList.replaceChildren();
-
-    const errorMessage = document.createElement("p");
-    errorMessage.setAttribute("role", "alert");
-    errorMessage.style.color = "var(--color-danger)";
-    errorMessage.textContent =
-      error instanceof Error
-        ? `Tasks could not be loaded: ${error.message}`
-        : "Tasks could not be loaded. Please refresh the page and try again.";
-
-    elements.taskList.append(errorMessage);
+    resetDashboardAfterError(error);
   }
 }
 
@@ -205,7 +266,6 @@ function setupMobileNavigation() {
     const isOpen = elements.sidebar.classList.toggle("is-open");
 
     elements.mobileMenu.setAttribute("aria-expanded", String(isOpen));
-
     elements.mobileMenu.setAttribute(
       "aria-label",
       isOpen ? "Close navigation" : "Open navigation",
@@ -219,7 +279,16 @@ if (elements.date && elements.taskList) {
   setupMobileNavigation();
   renderDashboard();
 
-  // Refresh dashboard data when returning to this page
-  // from the browser's back/forward cache.
   window.addEventListener("pageshow", renderDashboard);
+
+  // Refresh if task data changes in another tab.
+  window.addEventListener("storage", (event) => {
+    if (event.key === TASKS_KEY || event.key === null) {
+      renderDashboard();
+    }
+  });
+
+  // Refresh after restoration or clearing in this tab.
+  window.addEventListener("dayflow:data-restored", renderDashboard);
+  window.addEventListener("dayflow:data-cleared", renderDashboard);
 }

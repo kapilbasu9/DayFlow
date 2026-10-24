@@ -1,4 +1,3 @@
-
 .dashboard-welcome {
   display: flex;
   align-items: flex-start;
@@ -27,9 +26,55 @@
 
 .dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-progress {
   margin-bottom: 28px;
+}
+
+.dashboard-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dashboard-progress-header h3 {
+  margin: 0 0 6px;
+}
+
+.dashboard-progress-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+#today-progress-label {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.dashboard-progress-track {
+  height: 10px;
+  overflow: hidden;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.dashboard-progress-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: inherit;
+  transition: width 180ms ease;
 }
 
 .stat-card {
@@ -198,6 +243,10 @@
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 650px) {
@@ -206,7 +255,7 @@
   }
 
   .dashboard-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 

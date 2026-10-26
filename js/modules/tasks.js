@@ -5,6 +5,11 @@ import {
   deleteTask,
 } from "../services/taskService.js";
 
+import {
+  getTaskCategories,
+  organizeTasks,
+} from "../services/taskOrganizationService.js";
+
 const elements = {
   form: document.querySelector("#task-form"),
   formPanel: document.querySelector("#task-form-panel"),
@@ -19,6 +24,9 @@ const elements = {
   list: document.querySelector("#task-list"),
   count: document.querySelector("#task-count"),
   search: document.querySelector("#task-search"),
+  categoryFilter: document.querySelector("#task-category-filter"),
+  priorityFilter: document.querySelector("#task-priority-filter"),
+  sortBy: document.querySelector("#task-sort-by"),
   filters: document.querySelectorAll("[data-filter]"),
   mobileMenu: document.querySelector("#app-mobile-menu"),
   sidebar: document.querySelector("#app-sidebar"),
@@ -152,19 +160,39 @@ function renderTask(task) {
   return item;
 }
 
+function updateCategoryOptions(allTasks) {
+  if (!elements.categoryFilter) return;
+
+  const selectedCategory = elements.categoryFilter.value;
+  const categories = getTaskCategories(allTasks);
+
+  const allOption = document.createElement("option");
+  allOption.value = "";
+  allOption.textContent = "All categories";
+
+  const categoryOptions = categories.map((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    return option;
+  });
+
+  elements.categoryFilter.replaceChildren(allOption, ...categoryOptions);
+
+  const matchingCategory = categories.find(
+    (category) => category.toLowerCase() === selectedCategory.toLowerCase(),
+  );
+
+  elements.categoryFilter.value = matchingCategory || "";
+}
+
 function getVisibleTasks(allTasks) {
-  const query = elements.search.value.trim().toLowerCase();
-
-  return allTasks.filter((task) => {
-    const matchesFilter =
-      activeFilter === "all" ||
-      (activeFilter === "pending" && !task.completed) ||
-      (activeFilter === "completed" && task.completed);
-
-    const searchableText =
-      `${task.title} ${task.category || ""} ${task.priority || ""}`.toLowerCase();
-
-    return matchesFilter && searchableText.includes(query);
+  return organizeTasks(allTasks, {
+    status: activeFilter,
+    category: elements.categoryFilter?.value || "",
+    priority: elements.priorityFilter?.value || "",
+    query: elements.search?.value || "",
+    sortBy: elements.sortBy?.value || "dueDate",
   });
 }
 
@@ -175,9 +203,15 @@ function renderTasks() {
     // Read saved tasks once so counts and visible tasks use
     // the same validated snapshot.
     const allTasks = getTasks();
+
+    updateCategoryOptions(allTasks);
+
     const visibleTasks = getVisibleTasks(allTasks);
 
-    elements.count.textContent = `${allTasks.length} ${allTasks.length === 1 ? "task" : "tasks"}`;
+    elements.count.textContent =
+      visibleTasks.length === allTasks.length
+        ? `${allTasks.length} ${allTasks.length === 1 ? "task" : "tasks"}`
+        : `${visibleTasks.length} of ${allTasks.length} tasks`;
 
     elements.list.replaceChildren();
 
@@ -300,6 +334,9 @@ elements.filters.forEach((button) => {
 });
 
 elements.search?.addEventListener("input", renderTasks);
+elements.categoryFilter?.addEventListener("change", renderTasks);
+elements.priorityFilter?.addEventListener("change", renderTasks);
+elements.sortBy?.addEventListener("change", renderTasks);
 
 elements.list?.addEventListener("change", (event) => {
   const checkbox = event.target.closest('[data-action="toggle"]');

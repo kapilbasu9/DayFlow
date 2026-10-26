@@ -124,6 +124,58 @@
   font: inherit;
 }
 
+/* Task organization filters and sorting */
+
+.task-organization-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 16px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.task-organization-field {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.task-organization-field label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.task-organization-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 32px 9px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.task-organization-field select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .task-organization-controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+}
+
 .task-list {
   display: grid;
   gap: 12px;

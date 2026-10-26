@@ -157,22 +157,44 @@
                 </button>
               </div>
 
-              <p class="tasks-message task-field-full" id="task-message" role="status" aria-live="polite"></p>
+              <p
+                class="tasks-message task-field-full"
+                id="task-message"
+                role="status"
+                aria-live="polite"
+              ></p>
             </form>
           </section>
 
           <section class="tasks-list-panel">
+
+            <!-- Existing status filters and search -->
             <div class="task-toolbar">
               <div class="task-filters" role="group" aria-label="Filter tasks">
-                <button class="task-filter is-active" type="button" data-filter="all" aria-pressed="true">
+                <button
+                  class="task-filter is-active"
+                  type="button"
+                  data-filter="all"
+                  aria-pressed="true"
+                >
                   All
                 </button>
 
-                <button class="task-filter" type="button" data-filter="pending" aria-pressed="false">
+                <button
+                  class="task-filter"
+                  type="button"
+                  data-filter="pending"
+                  aria-pressed="false"
+                >
                   Pending
                 </button>
 
-                <button class="task-filter" type="button" data-filter="completed" aria-pressed="false">
+                <button
+                  class="task-filter"
+                  type="button"
+                  data-filter="completed"
+                  aria-pressed="false"
+                >
                   Completed
                 </button>
               </div>
@@ -186,14 +208,51 @@
               >
             </div>
 
+            <!-- Phase 3: Category, priority and sorting controls -->
+            <div
+              class="task-organization-controls"
+              role="group"
+              aria-label="Organize tasks"
+            >
+              <div class="task-organization-field">
+                <label for="task-category-filter">Category</label>
+                <select id="task-category-filter">
+                  <option value="">All categories</option>
+                </select>
+              </div>
+
+              <div class="task-organization-field">
+                <label for="task-priority-filter">Priority</label>
+                <select id="task-priority-filter">
+                  <option value="">All priorities</option>
+                  <option value="high">High priority</option>
+                  <option value="medium">Medium priority</option>
+                  <option value="low">Low priority</option>
+                </select>
+              </div>
+
+              <div class="task-organization-field">
+                <label for="task-sort-by">Sort by</label>
+                <select id="task-sort-by">
+                  <option value="dueDate">Earliest due date</option>
+                  <option value="priority">Highest priority</option>
+                  <option value="title">Title (A-Z)</option>
+                  <option value="createdAt">Recently created</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Existing task heading and count -->
             <div class="task-toolbar">
               <h2 id="task-list-heading">Your tasks</h2>
               <span class="tasks-message" id="task-count">0 tasks</span>
             </div>
 
+            <!-- Existing task list -->
             <div class="task-list" id="task-list">
               <p class="tasks-empty">Loading tasks...</p>
             </div>
+
           </section>
 
         </div>
